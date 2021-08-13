@@ -1,0 +1,151 @@
+
+<html lang="en">
+<meta charset="UTF-8"></meta>
+<meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/3/w3.css"></link>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css"></link>
+<body>
+
+<!-- Style -->
+<style>
+	.container {
+  position: relative;
+  width: 100%%;
+}
+
+.container img {
+  width: 100%;
+  height: auto;
+}
+
+.container .btn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  background-color: rgba(0,0,0,0);
+  color: white;
+  font-size: 16px;
+  padding: 82px 82px;
+  border: none;
+  cursor: pointer;
+  border-radius: 50%;
+  text-align: center;
+}
+
+.container .btn:hover {
+  background-color: rgba(0,0,0.1,0.1);
+}
+</style>
+
+<!-- Navigation -->
+<nav class="w3-bar w3-black">
+  <a href="#FRIDAY" class="w3-button w3-bar-item">FRIDAY</a>
+  <a href="#PORTFOLIO" class="w3-button w3-bar-item">PORTFOLIO</a>
+</nav>
+
+<!-- Slide Show -->
+<div class="container">
+  <img src="AI.gif" alt="AI" style="width:100%"></img>
+  <button id="start-btn" class = "btn" ></button>
+</div>
+
+<script>
+  const startBtn = document.querySelector("#start-btn");
+
+  const recognistion = new webkitSpeechRecognition();
+  recognistion.continuous = true;
+  recognistion.lang = "en-US";
+  recognistion.interimResults = false;
+  recognistion.maxAlternatives = 1 ;
+
+  const synth = window.speechSynthesis;
+
+  startBtn.addEventListener("click",() => {
+	recognistion.start();
+  });
+
+  recognistion.onresult =(e) => {
+	const transcript = e.results[e.results.length -1]        [0].transcript.trim();
+	
+	//Greetings
+	if (transcript === "hello" 
+	|| transcript === "hi"
+	)
+	{
+		recognistion.stop()
+		const utter = new SpeechSynthesisUtterance("hi, how are you?");
+		utter.onend = () => {
+			recognistion.start();
+		}
+		synth.speak(utter);
+	}
+	
+	//bye
+	
+	if (transcript === "bye" 
+	|| transcript === "goodbye"
+	)
+	{
+		recognistion.stop()
+		const utter = new SpeechSynthesisUtterance("good bye, see you   soon");
+		synth.speak(utter);
+	}
+	
+	if (transcript === "who created you" 
+	)
+	{
+		recognistion.stop()
+		const utter = new SpeechSynthesisUtterance("Suhas Nayak");
+		utter.onend = () => {
+			recognistion.start();
+		}
+		synth.speak(utter);
+	}
+	if (transcript === "where are you from" 
+	)
+	{
+		recognistion.stop()
+		const utter = new SpeechSynthesisUtterance("Udupi, Karnataka, India");
+		utter.onend = () => {
+			recognistion.start();
+		}
+		synth.speak(utter);
+	}
+	if (transcript === "Jokes"
+	|| transcript === "tell me a joke")
+	{
+		recognistion.stop()
+		const utter = new SpeechSynthesisUtterance("a joke");
+		utter.onend = () => {
+			recognistion.start();
+		}
+		synth.speak(utter);
+	}
+	
+	};
+</script>
+
+<!-- Description -->
+<section class="w3-container w3-center w3-content" style="max-width:600px">
+  <h2 class="w3-wide">FRIDAY</h2>
+  <p class="w3-opacity"><i>The AI chat bot</i></p>
+  <p class="w3-justify">F.R.I.D.A.Y. (Female Replacement Intelligent Digital Assistant Youth) is a fictional artificial intelligence appearing in American comic books published by Marvel Comics, usually depicted as Tony Stark's personal assistant and ally.
+
+In the Marvel Cinematic Universe, F.R.I.D.A.Y. was voiced by Kerry Condon in the films Avengers: Age of Ultron (2015), Captain America: Civil War (2016), Spider-Man: Homecoming (2017), Avengers: Infinity War (2018), and Avengers: Endgame (2019).</p>
+<p class="w3-opacity"><i>Note : To run the chat bot click on the centre of the above animation</i></p>
+</section>
+
+<!-- Footer -->
+<footer class="w3-container w3-padding-64 w3-center w3-black w3-xlarge">
+  <a href="#"><i class="fa fa-facebook-official"></i></a>
+  <a href="#"><i class="fa fa-pinterest-p"></i></a>
+  <a href="#"><i class="fa fa-twitter"></i></a>
+  <a href="#"><i class="fa fa-flickr"></i></a>
+  <a href="#"><i class="fa fa-linkedin"></i></a>
+  
+</footer>
+</body>
+</html>
+
